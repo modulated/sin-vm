@@ -1,5 +1,5 @@
-#ifndef SIN_H
-#define SIN_H
+#ifndef SYN_H
+#define SYN_H
 
 
 #include <stack.h>
@@ -10,8 +10,10 @@
 #include <sys/stat.h>
 
 #define STACK_SIZE 256
-#define LOCAL_SIZE 256
-#define OUTPUT_SIZE 4 
+#define OUTPUT_SIZE 4
+
+stack_int_t stack;
+int output[OUTPUT_SIZE];
 
 #define POP stack_pop(&stack)
 #define PUSH(x) stack_push(&stack, x)
