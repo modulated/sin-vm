@@ -1,0 +1,1 @@
+File to prevent deletion of build folder.

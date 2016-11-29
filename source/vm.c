@@ -1,4 +1,4 @@
-#include "syn.h"
+#include "sin.h"
 // #define DEBUG
 
 // Dummy Program, cont array of 4 bytes 

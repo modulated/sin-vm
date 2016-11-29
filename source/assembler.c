@@ -1,4 +1,4 @@
-#include "syn.h"
+#include "sin.h"
 
 #define MAX_NAME_SIZE 128
 #define MAX_LINE_SIZE 128
@@ -129,7 +129,12 @@ void parse_san_to_syn(FILE* in, FILE* out)
 	read_line(in, linebuffer);
 	
 	printf("Line: %s\n", linebuffer);
-}
+	program[0] = SRT;
+	program[1] = SET;
+	program[2] = 1;
+	program[3] = END;
+	fwrite(program, sizeof(int), 4, out);
+}	
 
 
 
