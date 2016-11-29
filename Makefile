@@ -5,18 +5,18 @@ HEADER_DIR=include
 OBJECTS=$(patsubst %.c, %.o, $(SOURCE))
 
 VM=build/sin-vm
-ASSEMBLER=build/sin-assembler
+ASM=build/sin-asm
 
 
-all: $(VM) $(ASSEMBLER) tests
+all: $(VM) $(ASM) tests
 
-$(ASSEMBLER): $(DEPS) $(HEADER) source/assembler.c
-	$(CC) $(CFLAGS) -o $(ASSEMBLER) $(DEPS) source/assembler.c 
+$(ASM): $(DEPS) $(HEADER) source/sin-asm.c
+	$(CC) $(CFLAGS) -o $(ASM) $(DEPS) source/sin-asm.c 
 
-$(VM): $(DEPS) $(HEADER) source/vm.c
-	$(CC) $(CFLAGS) -o $(VM) $(DEPS) source/vm.c 
+$(VM): $(DEPS) $(HEADER) source/sin-vm.c
+	$(CC) $(CFLAGS) -o $(VM) $(DEPS) source/sin-vm.c 
 
-tests: $(VM) $(ASSEMBLER)
+tests: $(VM) $(ASM)
 	$(info NO TESTS)
 
 clean:
