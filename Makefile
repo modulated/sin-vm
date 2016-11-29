@@ -4,6 +4,7 @@ HEADER=$(wildcard include/*.h)
 HEADER_DIR=include
 OBJECTS=$(patsubst %.c, %.o, $(SOURCE))
 
+
 VM=build/sin-vm
 ASM=build/sin-asm
 
@@ -17,7 +18,8 @@ $(VM): $(DEPS) $(HEADER) source/sin-vm.c
 	$(CC) $(CFLAGS) -o $(VM) $(DEPS) source/sin-vm.c 
 
 tests: $(VM) $(ASM)
-	$(info NO TESTS)
+	sh test/test.sh
 
 clean:
-	rm source/*.o build/*
+	 
+	rm -r -- build/sin-*

@@ -1,4 +1,4 @@
-#include "sin.h"
+#include <sin.h>
 // #define DEBUG
 
 // Dummy Program, cont array of 4 bytes 
@@ -8,11 +8,9 @@ int dummy[] = {
 	SET, 0xF, // SET 15
 	ADD,
 	OUT,
-	INI,
 	ADD,
-	INI,
 	OUT,
-	OUT,
+	GET,
 	END,
 };
 
