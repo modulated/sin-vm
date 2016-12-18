@@ -5,11 +5,8 @@
 int dummy[] = {
 	SET, 0x8, // SET 8
 	SET, 0x2, // SET 2
-	SET, 0xF, // SET 15
-	ADD,
-	OUT,
-	ADD,
-	OUT,
+	GTE,
+	JPO, 1,
 	GET,
 	END,
 };

@@ -1,7 +1,6 @@
 #include <sin.h>
 #include <sin-ops.h>
 
-#define DEBUG
 
 int execute_program(int* input, int* output)
 {
@@ -33,7 +32,31 @@ int execute_program(int* input, int* output)
 				
 			case JMP:
 				index = input[index];
-				printf("JMP to %d\n", index);
+				op_jmp();
+				break;
+
+			case JPO:
+				if (POP > 0)
+					index = input[index];
+				else index++;
+
+				op_jpo();
+				break;
+			
+			case JZE:
+				if (POP == 0)
+					index = input[index];
+				else index++;
+
+				op_jze();
+				break;
+			
+			case JNE:
+				if (POP < 0)
+					index = input[index];
+				else index++;
+				
+				op_jne();
 				break;
 
 			case ADD:
@@ -50,6 +73,22 @@ int execute_program(int* input, int* output)
 			
 			case MOD:
 				op_mod();
+				break;
+
+			case LTH:
+				op_lth();
+				break;
+
+			case GTH:
+				op_gth();
+				break;
+			
+			case LTE:
+				op_lte();
+				break;
+
+			case GTE:
+				op_gte();
 				break;
 
 			case INI:

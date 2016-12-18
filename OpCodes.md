@@ -29,9 +29,9 @@ SIN ASM files must have a .san file extention with each line ending in \n.
 | OpCode | Description | Arguments |
 |--------|-------------|----------:|
 |'jmp' | Jump to <1> instruction | 1|
-|'jmt' | Jump to <1> instruction if top of stack positive | 1|
-|'jmz' | Jump to <1> instruction if top of stack zero | 1|
-|'jmn' | Jump to <1> instruction if top of stack negative | 1|
+|'jpo' | Jump to <1> instruction if top of stack positive | 1|
+|'jze' | Jump to <1> instruction if top of stack zero | 1|
+|'jne' | Jump to <1> instruction if top of stack negative | 1|
 
 ##Input & Output
 | OpCode | Description | Arguments |

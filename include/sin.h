@@ -1,5 +1,5 @@
-#ifndef SYN_H
-#define SYN_H
+#ifndef SIN_H
+#define SIN_H
 
 
 #include <stack.h>
@@ -16,6 +16,7 @@ stack_int_t stack;
 int output[OUTPUT_SIZE];
 
 #define POP stack_pop(&stack)
+#define PEEK stack_peek(&stack)
 #define PUSH(x) stack_push(&stack, x)
 
 /* BASIC OPCODES */
@@ -28,7 +29,9 @@ int output[OUTPUT_SIZE];
 
 /* CONTROL FLOW */
 #define JMP 	0x0000000A // Jump to program buffer address
-#define JMZ 	0x0000000B // Jump to program buffer address of next value if stack zero 
+#define JPO 	0x0000000B // Jump to program buffer address of next value if stack zero 
+#define JZE 	0x0000000C // Jump to program buffer address of next value if stack zero 
+#define JNE 	0x0000000D // Jump to program buffer address of next value if stack zero 
 
 /* MATHS */
 #define INC		0x00000100 // Increment first stack element
@@ -38,6 +41,10 @@ int output[OUTPUT_SIZE];
 #define	MUL 	0x0000010C // Multiply first two stack elements
 #define	DIV 	0x0000010D // Divide first element by second
 #define	MOD 	0x0000010E // Modulo division
+#define LTH 	0x00000111 // First stack less than second stack element
+#define GTH 	0x00000112 // First stack greater than second stack element
+#define LTE 	0x00000113 // First stack less than or equal to second stack element
+#define GTE 	0x00000114 // First stack greater than or equal to second stack element
 
 /* MEMORY - variables and heap */ 
 

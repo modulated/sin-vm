@@ -2,6 +2,7 @@
 #define SIN_OPS_H
 
 #include "sin.h" 
+#define DEBUG
 
 int op_get () {
 	#ifdef DEBUG
@@ -23,9 +24,36 @@ void op_clr () {
 	#ifdef DEBUG
 		puts("CLR");
 	#endif
-
-
 }
+
+void op_jmp() {
+	#ifdef DEBUG
+		puts("JMP");
+	#endif
+}
+
+void op_jpo() {
+	#ifdef DEBUG
+		puts("JPO");
+	#endif
+}
+
+void op_jze() {
+	#ifdef DEBUG
+		puts("JZE");
+	#endif
+}
+
+void op_jne() {
+	#ifdef DEBUG
+		puts("JNE");
+	#endif
+}
+
+
+/*=================
+ *   ARITHMETIC
+==================*/
 
 void op_add () {
 	#ifdef DEBUG
@@ -59,6 +87,38 @@ void op_div() {
 	#endif
 }
 
+void op_lth() {
+	PUSH(POP < POP);
+
+	#ifdef DEBUG
+		puts("LTH");
+	#endif
+}
+
+void op_gth() {
+	PUSH(POP > POP);
+
+	#ifdef DEBUG
+		puts("GTH");
+	#endif
+}
+
+void op_lte() {
+	PUSH(POP <= POP);
+
+	#ifdef DEBUG
+		puts("LTE");
+	#endif
+}
+
+void op_gte() {
+	PUSH(POP >= POP);
+
+	#ifdef DEBUG
+		puts("GTE");
+	#endif
+}
+
 void op_mod() {
 	PUSH(POP % POP);
 	
@@ -66,6 +126,11 @@ void op_mod() {
 		puts("MOD");
 	#endif
 }
+
+/*=================
+ * INPUT & OUTPUT
+==================*/
+
 
 void op_ini() {
 	#ifdef DEBUG
