@@ -33,3 +33,5 @@
 *.su
 
 /.vscode/
+source/cc-*
+build/
