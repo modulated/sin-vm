@@ -1,4 +1,5 @@
-CFLAGS=-std=c99 -g -Wall -pedantic -I$(HEADER_DIR)
+CC=clang
+CFLAGS=-std=c11 -Wall -pedantic -I$(HEADER_DIR)
 DEPS=source/stack.c source/sin.c
 HEADER=$(wildcard include/*.h)
 HEADER_DIR=include
@@ -23,7 +24,7 @@ $(VM): $(DEPS) $(HEADER) source/sin-vm.c
 	$(CC) $(CFLAGS) -o $(VM) $(DEPS) source/sin-vm.c 
 
 $(COM): $(DEPS) $(HEADER) $(PARSE) $(LEX)
-	$(CC) -I$(HEADER_DIR) -o $(COM) $(LEX) $(PARSE) source/sin-cc.c $(DEPS)
+	$(CC) $(CFLAGS) -o $(COM) $(LEX) $(PARSE) source/sin-cc.c $(DEPS)
 
 $(LEX): source/sin-cc.l
 	flex -o $(LEX) source/sin-cc.l 
