@@ -6,39 +6,35 @@
 
 %union {
 	int i;
-	unsigned int u;
-	float r;
 	char* s;
 }
 
 %token INT
-%token REAL
 %token EQ
 %token ID
 
-%type<i> INT expr
-%type<r> REAL
+%type<i> INT expr 
 %type<s> ID stat line
 
 %%
 
 program:
-	program 
+	// Empty program
+	| program 
 	| line
 	;
 
 line:
-	stat '\n' { $$ = $1 ;}
-	| expr '\n' { $$ = $1 ;}
+	stat '\n' { $$ = $1; }	
 	;
 
 stat:
-	ID '=' expr { printf("%s set to %d\n", yyval.s, $3); }
+	ID '=' expr { printf("%s = %d\n", yyval.s, $3); }
 
 
 expr:
 	INT { $$ = $1; }
-	| ID { $$ = $1; }
+	| ID { printf("ID: %s\n",$1); }
 	;
 
 %%

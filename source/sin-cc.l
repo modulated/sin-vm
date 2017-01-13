@@ -3,7 +3,7 @@
 	#include "cc-parser.tab.h"
 	
 	void yyerror(char* s);
-	
+	int fileno(FILE* f);
 	int yywrap() {
 		return 1;
 	}
@@ -15,16 +15,11 @@
 	return INT;
 }
 
-[0-9]+\.[0-9]+	{ // Real
-	yylval.r = atof(yytext);
-	return REAL;
-}
-
 = {
 	return EQ;
 }
 
-[a-zA-Z]+[a-zAZ0-9_]+ {
+[a-zA-Z]+([a-zAZ0-9_]+)? {
 	yylval.s = (yytext);	
 	return ID;
 }
