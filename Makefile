@@ -4,8 +4,12 @@ DEPS=source/stack.c source/sin.c
 HEADER=$(wildcard include/*.h)
 HEADER_DIR=include
 OBJECTS=$(patsubst %.c, %.o, $(SOURCE))
-LEX=source/cc-lexer.yy.c
-PARSE=source/cc-parser.tab.c
+
+
+PARSEIN=source/sin-cc.y
+LEXIN=source/sin-cc.l
+LEXOUT=source/cc-lexer.yy.c
+PARSEOUT=source/cc-parser.tab.c
 
 
 VM=build/sin-vm
@@ -23,18 +27,18 @@ $(ASM): $(DEPS) $(HEADER) source/sin-asm.c
 $(VM): $(DEPS) $(HEADER) source/sin-vm.c
 	$(CC) $(CFLAGS) -o $(VM) $(DEPS) source/sin-vm.c 
 
-$(COM): $(DEPS) $(HEADER) $(PARSE) $(LEX) source/sin-cc.c
-	$(CC) $(CFLAGS) -o $(COM) $(LEX) $(PARSE) source/sin-cc.c $(DEPS)
+$(COM): $(DEPS) $(HEADER) $(PARSEOUT) $(LEXOUT) $(PARSEIN) $(LEXIN) source/sin-cc.c
+	$(CC) $(CFLAGS) -o $(COM) $(LEXOUT) $(PARSEOUT) source/sin-cc.c $(DEPS)
 
-$(LEX): source/sin-cc.l
-	flex -o $(LEX) source/sin-cc.l 
+$(LEXOUT): $(LEXIN)
+	flex -o $(LEXOUT) $(LEXIN) 
 
-$(PARSE): source/sin-cc.y
-	bison -d source/sin-cc.y -o $(PARSE)
+$(PARSEOUT): $(PARSEIN)
+	bison -d -o $(PARSEOUT) $(PARSEIN)
 
 tests: $(VM) $(ASM)
 	sh test/test.sh
 
 clean:
-	rm $(LEX) $(PARSE)
+	rm $(LEXOUT) $(PARSEOUT)
 	rm -r -- build/sin-*
