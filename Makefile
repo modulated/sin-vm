@@ -23,7 +23,7 @@ $(ASM): $(DEPS) $(HEADER) source/sin-asm.c
 $(VM): $(DEPS) $(HEADER) source/sin-vm.c
 	$(CC) $(CFLAGS) -o $(VM) $(DEPS) source/sin-vm.c 
 
-$(COM): $(DEPS) $(HEADER) $(PARSE) $(LEX)
+$(COM): $(DEPS) $(HEADER) $(PARSE) $(LEX) source/sin-cc.c
 	$(CC) $(CFLAGS) -o $(COM) $(LEX) $(PARSE) source/sin-cc.c $(DEPS)
 
 $(LEX): source/sin-cc.l
