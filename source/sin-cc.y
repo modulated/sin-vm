@@ -1,8 +1,11 @@
 %{
 	#include <stdio.h>
 	int yylex();	
-	void yyerror(char *s);
+	void yyerror(const char *s);
 %}
+
+
+%define parse.lac full
 
 %union {
 	int i;
@@ -20,7 +23,7 @@
 
 program:
 	// Empty program
-	| program 
+	| program line
 	| line
 	;
 
@@ -39,6 +42,7 @@ expr:
 
 %%
 
-void yyerror(char* s) {
+void yyerror(const char* s) {
 	fprintf(stderr, "%s\n", s);
+
 }

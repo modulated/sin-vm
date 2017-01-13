@@ -5,13 +5,14 @@ FILE* infilefp;
 extern FILE* yyin;
 
 int yylex();
+int yyparse();
 
 int main(int argc, char** argv) {
 	puts("SIN-CC Compiler");
 	puts("");
 	
 	if (argc == 1)
-		printf("%d\n", yylex());
+		printf("%d\n", yyparse());
 	
 	else if (argc == 2) {
 
