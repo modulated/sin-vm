@@ -20,11 +20,14 @@ int main(int argc, char** argv) {
 		strcpy(infilestr, argv[1]);
 		infilefp = fopen(infilestr, "r");
 		yyin = infilefp;
-		int res = 1;
-		while (res != 0) {
-			res = yylex();
-			printf("%d\n", res);
-		} 
+
+    printf("%d\n", yyparse());
+
+		// int res = 1;
+		// while (res != 0) {
+		// 	res = yylex();
+		// 	printf("%d\n", res);
+		// } 
 	}
 
 	else {
@@ -32,6 +35,7 @@ int main(int argc, char** argv) {
 		exit(1);
 	}
 
+  puts("");
 	return 0;
 }
 

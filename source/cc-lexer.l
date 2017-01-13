@@ -10,18 +10,25 @@
 %}
 
 %%
+
 [0-9]+	{ // Int
 	yylval.i = atoi(yytext);
 	return INT;
 }
 
-= {
-	return EQ;
-}
 
 [a-zA-Z]+([a-zAZ0-9_]+)? {
 	yylval.s = (yytext);	
 	return ID;
 }
+
+"+" return PLUS;
+"=" return EQUAL;
+"(" return L_PAREN;
+")" return R_PAREN;
+
+"\n" return NEWLINE;
+"\t" ;
+<<EOF>> return END_OF_FILE;
 
 %%
