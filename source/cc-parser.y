@@ -4,9 +4,6 @@
 	void yyerror(const char *s);
 %}
 
-
-%define parse.lac full
-
 %union {
 	int i;
 	char* s;

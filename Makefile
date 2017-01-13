@@ -5,20 +5,21 @@ HEADER=$(wildcard include/*.h)
 HEADER_DIR=include
 OBJECTS=$(patsubst %.c, %.o, $(SOURCE))
 
-
-PARSEIN=source/sin-cc.y
-LEXIN=source/sin-cc.l
-LEXOUT=source/cc-lexer.yy.c
-PARSEOUT=source/cc-parser.tab.c
-
-
 VM=build/sin-vm
 ASM=build/sin-asm
 COM=build/sin-cc
 
+PARSEIN=source/cc-parser.y
+LEXIN=source/cc-lexer.l
+LEXOUT=source/cc-lexer.yy.c
+PARSEOUT=source/cc-parser.tab.c
+PARSEHOUT=source/cc-parser.tab.h
+
+
 all: $(COM) $(VM) $(ASM) tests
 
-com: $(COM)	
+com: $(COM)
+	build/sin-cc test/a.cin	
 	build/sin-cc
 	
 $(ASM): $(DEPS) $(HEADER) source/sin-asm.c
@@ -31,14 +32,14 @@ $(COM): $(DEPS) $(HEADER) $(PARSEOUT) $(LEXOUT) $(PARSEIN) $(LEXIN) source/sin-c
 	$(CC) $(CFLAGS) -o $(COM) $(LEXOUT) $(PARSEOUT) source/sin-cc.c $(DEPS)
 
 $(LEXOUT): $(LEXIN)
-	flex -o $(LEXOUT) $(LEXIN) 
+	flex -o $(LEXOUT) $(LEXIN)
 
 $(PARSEOUT): $(PARSEIN)
-	bison -d -o $(PARSEOUT) $(PARSEIN)
+	bison -o $(PARSEOUT) -d $(PARSEIN)
 
 tests: $(VM) $(ASM)
 	sh test/test.sh
 
 clean:
-	rm $(LEXOUT) $(PARSEOUT)
-	rm -r -- build/sin-*
+	rm -f $(LEXOUT) $(PARSEOUT) $(PARSEHOUT)
+	rm -rf -- build/sin-*

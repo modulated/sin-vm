@@ -33,5 +33,6 @@
 *.su
 
 /.vscode/
-source/cc-*
+source/cc-parser.tab.*
+source/cc-lexer.yy.c
 build/
