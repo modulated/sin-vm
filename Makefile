@@ -18,6 +18,14 @@ PARSEHOUT=source/cc-parser.tab.h
 
 all: $(COM) $(VM) $(ASM) tests
 
+asm: $(ASM)
+	build/sin-asm demo/test.san
+	build/sin-asm
+
+vm: $(VM)
+	build/sin-vm demo/test.sin
+	build/sin-vm
+
 com: $(COM)
 	build/sin-cc test/a.cin	
 	build/sin-cc
