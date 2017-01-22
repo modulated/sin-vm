@@ -3,7 +3,7 @@
 #define MAX_NAME_SIZE 128
 #define MAX_LINE_SIZE 128
 
-/* Takes .san file input and generates .syn code */
+/* Takes .san file input and generates .sin code */
 
 int lexfile(char* file)
 {
@@ -114,7 +114,7 @@ void write_header(FILE* outfile)
 	fwrite(&head, sizeof(head), 1, outfile);	
 }
 
-void parse_san_to_syn(FILE* in, FILE* out)
+void parse_san_to_sin(FILE* in, FILE* out)
 {
 	if (in == NULL || out == NULL)
 	{
@@ -143,7 +143,7 @@ int main (int argc, char* argv[])
 	// Run with 1 arg which must end in .san.
 	if (argc != 2 || verify_extention(argv[1], "san") != 0) 
 	{
-		puts("Parse SAN (Syn Assembly Notation) files to Syn code.");
+		puts("Parse SAN (Sin Assembly Notation) files to Sin bytecode.");
 		printf("Usage: %s <file>.san\n", argv[0]);
 		return 1;
 	}
@@ -166,7 +166,7 @@ int main (int argc, char* argv[])
 	
 	write_header(outfile);
 
-	parse_san_to_syn(infile, outfile);
+	parse_san_to_sin(infile, outfile);
 
 	if (lexfile(argv[1]) != 0)
 	{
