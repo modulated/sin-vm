@@ -20,7 +20,7 @@ int output[OUTPUT_SIZE];
 #define PUSH(x) stack_push(&stack, x)
 
 /* BASIC OPCODES */
-#define SRT		0x53594E2E // Start of op codes
+#define SRT	0x53594E2E // Start of op codes
 #define	END 	0xFFFFFFFF // End of op codes
 #define	NOP 	0x00000000 // No operation
 #define	SET 	0x00000002 // Push value onto stack
@@ -34,8 +34,8 @@ int output[OUTPUT_SIZE];
 #define JNE 	0x0000000D // Jump to program buffer address of next value if stack zero 
 
 /* MATHS */
-#define INC		0x00000100 // Increment first stack element
-#define DEC		0x00000101 // Decrement first stack element
+#define INC	0x00000100 // Increment first stack element
+#define DEC	0x00000101 // Decrement first stack element
 #define	ADD 	0x0000010A // Add first two stack elements
 #define	SUB 	0x0000010B // Subtract second element from first
 #define	MUL 	0x0000010C // Multiply first two stack elements
