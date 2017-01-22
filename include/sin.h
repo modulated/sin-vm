@@ -72,6 +72,6 @@ size_t get_filesize(char* file);
 void print_error(int error);
 int execute_program(int* input, int* output);
 void instruction_toupper(char* code);
-int sancode_to_syncode(char* code);
+int sancode_to_sincode(char* code);
 
 #endif

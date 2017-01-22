@@ -26,7 +26,7 @@ void generate_outfile_name(char* input, char* output)
 		i++;
 	}
 	output[i] = '\0';	
-	output[i-2] = 'y';
+	output[i-2] = 'i';
 }
 
 int verify_extention(char* input, char* ext)

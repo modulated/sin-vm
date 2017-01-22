@@ -6,14 +6,14 @@ if [ "$?" = "1" ]; then
 	exit 1
 fi
 
-build/sin-vm demo/test.sin
+build/sin-vm test/test.sin
 if [ "$?" = "1" ]; then
-	echo "ERROR: sin-vm did not execute demo.sin"
+	echo "ERROR: sin-vm did not execute test.sin"
 	exit 1
 fi
 
-build/sin-asm demo/test.san
+build/sin-asm test/test.san
 if [ "$?" = "1" ]; then
-	echo "ERROR: sin-asm did not execute demo.san"
+	echo "ERROR: sin-asm did not execute test.san"
 	exit 1
 fi

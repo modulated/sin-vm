@@ -107,7 +107,7 @@ int execute_program(int* input, int* output)
 	return 0;
 }
 
-int sancode_to_syncode(char* code)
+int sancode_to_sincode(char* code)
 {
 	instruction_toupper(code);
 	/* BASIC */
