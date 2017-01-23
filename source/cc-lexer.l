@@ -31,8 +31,9 @@
 "(" return L_PAREN;
 ")" return R_PAREN;
 
-"\n" { ++line_num; return NEWLINE; }
-"." { printf("Unmatched sequence: %s\n", yytext); }
+\n { ++line_num; return NEWLINE; }
+[\t ] ;
+. { printf("Unmatched sequence: %s\n", yytext); }
 <<EOF>> return END_OF_FILE;
 
 %%
