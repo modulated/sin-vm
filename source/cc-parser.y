@@ -1,9 +1,12 @@
 %{
 	#include <stdio.h>
+	#include "ast.h"
 	int yylex();	
 	void yyerror(const char *s);
 	extern int line_num;
+	extern node_t tree;
 %}
+
 
 %union {
 	int i;
@@ -26,8 +29,14 @@
 %%
 
 program:
-	// Empty program
-	| statlist
+	// Empty
+	| term
+	| statlist term
+	;
+
+term:
+	NEWLINE END_OF_FILE
+	| END_OF_FILE
 	;
 
 statlist:
@@ -43,8 +52,8 @@ stat:
 
 
 expr:
-	INT { printf("INT: %d\n", yylval.i); }
-	| ID { printf("ID: %s\n", yylval.s); }
+	INT { printf("INT: %d\n", yylval.i); $$ = yylval.i; }
+	| ID { printf("ID: %s\n", yylval.s); $$ = 0; }
 	;
 
 %%
