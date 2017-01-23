@@ -1,6 +1,6 @@
 CC=clang
 CFLAGS=-std=c11 -Wall -pedantic -I$(HEADER_DIR)
-DEPS=source/stack.c source/sin.c
+DEPS=source/stack.c source/sin.c source/siphash.c
 HEADER=$(wildcard include/*.h)
 HEADER_DIR=include
 OBJECTS=$(patsubst %.c, %.o, $(SOURCE))
