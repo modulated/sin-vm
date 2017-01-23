@@ -1,5 +1,6 @@
 %{
 	#include <stdlib.h>
+	#include <string.h>
 	#include "cc-parser.tab.h"
 	
 	void yyerror(char* s);
@@ -7,7 +8,10 @@
 	int yywrap() {
 		return 1;
 	}
+	int line_num = 1;
 %}
+
+%option nounput
 
 %%
 
@@ -27,8 +31,8 @@
 "(" return L_PAREN;
 ")" return R_PAREN;
 
-"\n" return NEWLINE;
-"\t" ;
+"\n" { ++line_num; return NEWLINE; }
+"." { printf("Unmatched sequence: %s\n", yytext); }
 <<EOF>> return END_OF_FILE;
 
 %%

@@ -2,6 +2,7 @@
 	#include <stdio.h>
 	int yylex();	
 	void yyerror(const char *s);
+	extern int line_num;
 %}
 
 %union {
@@ -49,6 +50,6 @@ expr:
 %%
 
 void yyerror(const char* s) {
-	fprintf(stderr, "%s\n", s);
+	fprintf(stderr, "ERROR: %i: %s\n", line_num, s);
 
 }
