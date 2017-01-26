@@ -12,7 +12,7 @@ int main(int argc, char** argv) {
 	puts("");
 	
 	if (argc == 1)
-		printf("%d\n", yyparse());
+		printf("Parse: %d\n", yyparse());
 	
 	else if (argc == 2) {
 
@@ -21,13 +21,7 @@ int main(int argc, char** argv) {
 		infilefp = fopen(infilestr, "r");
 		yyin = infilefp;
 
-    printf("%d\n", yyparse());
-
-		// int res = 1;
-		// while (res != 0) {
-		// 	res = yylex();
-		// 	printf("%d\n", res);
-		// } 
+		printf("Parse: %d\n", yyparse());
 	}
 
 	else {

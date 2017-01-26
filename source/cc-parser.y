@@ -1,12 +1,15 @@
 %{
-	#include <stdio.h>
-	#include "ast.h"
+	#include <stdio.h>	
+	#include <string.h>	
+	#include "siphash.h"
 
 	int yylex();
 	void yyerror(const char *s);
 	extern int line_num;
-	extern node_t tree;
 	
+	int ht[0xFF] = {0};
+	void sethash(char* key, int val);
+	int gethash(char* key);
 
 %}
 
@@ -23,7 +26,7 @@
 %token PRINT
 %token NEWLINE END_OF_FILE
 
-%type<i> INT expr 
+%type<i> INT expr assignment
 %type<s> ID
 
 // Operator precedence
@@ -33,15 +36,11 @@
 %%
 
 program:
-	// Empty
-	| term
-	| statlist term
+	// Empty	
+	| statlist NEWLINE
+	| statlist END_OF_FILE
 	;
 
-term:
-	NEWLINE END_OF_FILE
-	| END_OF_FILE
-	;
 
 statlist:
 	stat
@@ -49,20 +48,46 @@ statlist:
 	;
 
 stat:
-	ID EQUAL expr { printf("%s = %d\n", $1, $3); }
-	| expr { }
+
+	| expr { printf("%d\n", $1); }
 	| PRINT expr { printf("%d\n", $2); }
+	| ID { printf("%s\n", yylval.s); }
 	;
 
 
 expr:
-	INT { $$ = yylval.i; }
-	| ID { $$ = 0; }
+	assignment
+	| INT { $$ = yylval.i; }
+	| L_PAREN ID R_PAREN { $$ = gethash(yylval.s); }
 	;
 
+assignment:
+	ID EQUAL expr { sethash("a", $3); $$ = $3; }
+	| ID MINUS EQUAL expr { $$ = $4; }
+	;
 %%
 
 void yyerror(const char* s) {
 	fprintf(stderr, "ERROR: %i: %s\n", line_num, s);
 
+}
+
+void sethash(char* key, int val) {
+	
+	uint8_t kp[8] = "roadslut";
+	uint8_t out[8];
+	siphash((unsigned char*)key, 1, kp, out, 8);
+	
+	// printf("%d: %d\n", out[0], val);
+	ht[out[0]] = val;
+}
+
+int gethash(char* key) {
+	
+	uint8_t kp[8] = "roadslut";
+	uint8_t out[8];
+	siphash((unsigned char*)key, 1, kp, out, 8);
+	
+	// printf("%d: %d\n", out[0], ht[out[0]]);
+	return ht[out[0]];
 }
