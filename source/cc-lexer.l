@@ -12,6 +12,7 @@
 %}
 
 %option nounput
+%option noinput
 
 %%
 

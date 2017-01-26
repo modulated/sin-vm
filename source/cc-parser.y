@@ -1,10 +1,13 @@
 %{
 	#include <stdio.h>
-	#include "ast.h"
-	int yylex();	
+	#include "ast.h"	
+
+	int yylex();
 	void yyerror(const char *s);
 	extern int line_num;
 	extern node_t tree;
+	
+
 %}
 
 
