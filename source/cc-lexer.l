@@ -28,13 +28,19 @@
 }
 
 "+" return PLUS;
+"-" return MINUS;
+"*" return STAR;
+"/" return F_SLASH;
 "=" return EQUAL;
 "(" return L_PAREN;
 ")" return R_PAREN;
+"<" return L_ANGLE;
+">" return R_ANGLE;
 
 \n { ++line_num; return NEWLINE; }
 [\t ] ;
-. { printf("Unmatched sequence: %s\n", yytext); }
 <<EOF>> return END_OF_FILE;
+
+. { printf("Unmatched sequence: %s\n", yytext); }
 
 %%

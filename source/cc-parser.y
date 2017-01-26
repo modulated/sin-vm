@@ -18,8 +18,8 @@
 
 %token INT
 %token ID
-%token EQUAL PLUS
-%token R_PAREN L_PAREN
+%token EQUAL PLUS MINUS STAR F_SLASH
+%token R_PAREN L_PAREN L_ANGLE R_ANGLE
 %token NEWLINE END_OF_FILE
 
 %type<i> INT expr 
