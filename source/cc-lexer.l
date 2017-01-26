@@ -21,6 +21,7 @@
 	return INT;
 }
 
+"print" return PRINT;
 
 [a-zA-Z]+([a-zAZ0-9_]+)? {
 	yylval.s = (yytext);	
