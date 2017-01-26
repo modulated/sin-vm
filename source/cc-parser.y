@@ -26,11 +26,11 @@
 %token PRINT
 %token NEWLINE END_OF_FILE
 
-%type<i> INT expr assignment
+%type<i> INT expr intarith assignment
 %type<s> ID
 
 // Operator precedence
-%left PLUS
+%left PLUS MINUS STAR F_SLASH EQUAL
 
 %start program
 %%
@@ -56,15 +56,24 @@ stat:
 
 
 expr:
-	assignment
+	intarith
 	| INT { $$ = yylval.i; }
-	| L_PAREN ID R_PAREN { $$ = gethash(yylval.s); }
+	| L_PAREN expr R_PAREN { $$ = $2; } // Paren grouping
+	| L_PAREN ID R_PAREN { $$ = gethash(yylval.s); } // ID evaluation
+	| assignment	
+	;
+
+intarith:
+	expr PLUS expr { $$ = $1 + $3; }
+	| expr MINUS expr { $$ = $1 - $3; }
+	| expr STAR expr { $$ = $1 * $3; }
+	| expr F_SLASH expr { $$ = $1 / $3; }
 	;
 
 assignment:
-	ID EQUAL expr { sethash("a", $3); $$ = $3; }
-	| ID MINUS EQUAL expr { $$ = $4; }
+	ID EQUAL expr { sethash("a", $3); $$ = $3; }	
 	;
+
 %%
 
 void yyerror(const char* s) {
