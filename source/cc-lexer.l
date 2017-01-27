@@ -40,7 +40,6 @@
 
 \n { ++line_num; return NEWLINE; }
 [\t ] ;
-<<EOF>> return END_OF_FILE;
 
 . { printf("Unmatched sequence: %s\n", yytext); }
 

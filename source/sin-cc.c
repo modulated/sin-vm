@@ -7,12 +7,18 @@ extern FILE* yyin;
 int yylex();
 int yyparse();
 
+void checkparse() {
+	int res = yyparse();
+	if (res == 0) puts("Parse success.");
+	else puts("ERROR: Parse failed.");
+}
+
 int main(int argc, char** argv) {
 	puts("SIN-CC Compiler");
 	puts("");
 	
 	if (argc == 1)
-		printf("Parse: %d\n", yyparse());
+		checkparse();
 	
 	else if (argc == 2) {
 
@@ -21,7 +27,7 @@ int main(int argc, char** argv) {
 		infilefp = fopen(infilestr, "r");
 		yyin = infilefp;
 
-		printf("Parse: %d\n", yyparse());
+		checkparse();
 	}
 
 	else {

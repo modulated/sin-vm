@@ -24,7 +24,7 @@
 %token EQUAL PLUS MINUS STAR F_SLASH
 %token R_PAREN L_PAREN L_ANGLE R_ANGLE
 %token PRINT
-%token NEWLINE END_OF_FILE
+%token NEWLINE
 
 %type<i> INT expr intarith assignment
 %type<s> ID
@@ -38,7 +38,7 @@
 program:
 	// Empty	
 	| statlist NEWLINE
-	| statlist END_OF_FILE
+	| statlist
 	;
 
 
